@@ -1264,7 +1264,7 @@ bool SPIClass::transfer(const void *buf, void *retbuf, size_t count, EventRespon
 /*     32 bit Teensy 4.x                                  */
 /**********************************************************/
 
-#elif defined(__arm__) && defined(TEENSYDUINO) && (defined(__IMXRT1052__) || defined(__IMXRT1062__))
+#elif defined(__arm__) && (defined(TEENSYDUINO) || defined(ARDUINO_QUARTO) ) && (defined(__IMXRT1052__) || defined(__IMXRT1062__))
 
 //#include "debug/printf.h"
 
@@ -1501,7 +1501,7 @@ void _spi_dma_rxISR0(void) {SPI.dma_rxisr();}
 
 // NOTE pin definitions are in the order MISO, MOSI, SCK, CS 
 // With each group, having pin number[n], setting[n], INPUT_SELECT_MUX settings[n], SELECT INPUT register
-#if defined(ARDUINO_TEENSY41)
+#if ( defined(ARDUINO_TEENSY41) || defined(ARDUINO_QUARTO) )
 const SPIClass::SPI_Hardware_t  SPIClass::spiclass_lpspi4_hardware = {
 	CCM_CCGR1, CCM_CCGR1_LPSPI4(CCM_CCGR_ON),
 	DMAMUX_SOURCE_LPSPI4_TX, DMAMUX_SOURCE_LPSPI4_RX, _spi_dma_rxISR0,
@@ -1553,7 +1553,7 @@ SPIClass SPI((uintptr_t)&IMXRT_LPSPI4_S, (uintptr_t)&SPIClass::spiclass_lpspi4_h
 // T4 has two other possible SPI objects...
 void _spi_dma_rxISR1(void) {SPI1.dma_rxisr();}
 
-#if defined(ARDUINO_TEENSY41)
+#if ( defined(ARDUINO_TEENSY41) || defined(ARDUINO_QUARTO) )
 const SPIClass::SPI_Hardware_t  SPIClass::spiclass_lpspi3_hardware = {
 	CCM_CCGR1, CCM_CCGR1_LPSPI3(CCM_CCGR_ON),
 	DMAMUX_SOURCE_LPSPI3_TX, DMAMUX_SOURCE_LPSPI3_RX, _spi_dma_rxISR1,
@@ -1602,7 +1602,7 @@ SPIClass SPI1((uintptr_t)&IMXRT_LPSPI3_S, (uintptr_t)&SPIClass::spiclass_lpspi3_
 
 void _spi_dma_rxISR2(void) {SPI2.dma_rxisr();}
 
-#if defined(ARDUINO_TEENSY41)
+#if ( defined(ARDUINO_TEENSY41) || defined(ARDUINO_QUARTO) )
 const SPIClass::SPI_Hardware_t  SPIClass::spiclass_lpspi1_hardware = {
 	CCM_CCGR1, CCM_CCGR1_LPSPI1(CCM_CCGR_ON),
 	DMAMUX_SOURCE_LPSPI1_TX, DMAMUX_SOURCE_LPSPI1_RX, _spi_dma_rxISR1,

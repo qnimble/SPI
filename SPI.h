@@ -15,7 +15,7 @@
 
 #include <Arduino.h>
 
-#if defined(__arm__) && defined(TEENSYDUINO)
+#if defined(__arm__) && ( defined(TEENSYDUINO) || defined(ARDUINO_QUARTO) )
 #if defined(__has_include) && __has_include(<EventResponder.h>)
 // SPI_HAS_TRANSFER_ASYNC - Defined to say that the SPI supports an ASYNC version
 // of the SPI_HAS_TRANSFER_BUF
@@ -1028,7 +1028,7 @@ private:
 /*     32 bit Teensy 4.x                                  */
 /**********************************************************/
 
-#elif defined(__arm__) && defined(TEENSYDUINO) && (defined(__IMXRT1052__) || defined(__IMXRT1062__))
+#elif defined(__arm__) && (defined(TEENSYDUINO) || defined(ARDUINO_QUARTO) ) && (defined(__IMXRT1052__) || defined(__IMXRT1062__))
 #define SPI_ATOMIC_VERSION 1
 
 //#include "debug/printf.h"
@@ -1068,7 +1068,7 @@ private:
 
 class SPIClass { // Teensy 4
 public:
-	#if defined(ARDUINO_TEENSY41)
+	#if defined(ARDUINO_TEENSY41) || defined(ARDUINO_QUARTO)
 	// T4.1 has SPI2 pins on memory connectors as well as SDCard
 	static const uint8_t CNT_MISO_PINS = 2;
 	static const uint8_t CNT_MOSI_PINS = 2;
